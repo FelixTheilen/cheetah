@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append("C:/Users/ftheilen/Source/ocelot")
+
 from ocelot import (
     Aperture,
     Cavity,
