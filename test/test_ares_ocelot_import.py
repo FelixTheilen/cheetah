@@ -12,7 +12,13 @@ from cheetah import (
     VerticalCorrector,
 )
 
+"""
 sys.path.append("C:/Users/ftheilen/Source/ocelot")
+"""
+sys.path.append("D:/Fachpraktikum_DESY/GitHub/ocelot-master")
+sys.path.append(
+    "C:/Users/felix theilen/appdata/local/programs/python/python310/lib/site-packages"
+)
 
 
 def test_import():

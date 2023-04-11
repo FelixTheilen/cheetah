@@ -1,6 +1,7 @@
 import sys
 
 sys.path.append("C:/Users/ftheilen/Source/ocelot")
+sys.path.append("D:/Fachpraktikum_DESY/GitHub/ocelot-master")
 
 from ocelot import (
     Aperture,
