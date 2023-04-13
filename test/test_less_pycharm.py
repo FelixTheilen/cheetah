@@ -79,6 +79,9 @@ def test_division_beam2_beam1():
     expected = torch.tensor([1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000])
     assert torch.allclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
 
+def test_cov_beam1():
+    actual = beam1._cov
+
 
 def test_division_cov_beam1_beam2():
     actual = beam1._cov / np.cov(beam2.particles.t().numpy())
