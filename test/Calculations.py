@@ -11,12 +11,20 @@ sys.path.append(
 """
 Test Beam, which can be found in GitHub in the folder benchmark/cheetah/ACHIP_EA1_2021.1351.001
 """
-
+"""
 beam1 = cheetah.ParameterBeam.from_astra(
     "D:/Fachpraktikum_DESY/GitHub/cheetah/benchmark/cheetah/ACHIP_EA1_2021.1351.001"
 )
 beam2 = cheetah.ParticleBeam.from_astra(
     "D:/Fachpraktikum_DESY/GitHub/cheetah/benchmark/cheetah/ACHIP_EA1_2021.1351.001"
+)
+"""
+
+beam1 = cheetah.ParameterBeam.from_astra(
+    "H:/Source/cheetah/benchmark/cheetah/ACHIP_EA1_2021.1351.001"
+)
+beam2 = cheetah.ParticleBeam.from_astra(
+    "H:/Source/cheetah/benchmark/cheetah/ACHIP_EA1_2021.1351.001"
 )
 
 segment = cheetah.Segment(
@@ -27,8 +35,24 @@ segment.quad.angle = 2e-3
 result1 = segment(beam1)
 result2 = segment(beam2)
 
-print("ParameterBeam")
+print("ParameterBeam, beam1: Energy")
+print(beam1.energy)
+
+print("ParticleBeam, beam2: Energy")
+print(beam2.energy)
+
+print("ParticleBeam, beam2: n")
+print(beam2.n)
+
+print("ParameterBeam, beam1: cov")
+print(beam1._cov)
+
+print("ParticleBeam, beam2: cov")
+print(np.cov(beam2.particles.t().numpy()))
+
+print("ParameterBeam, result1: mu")
 print(result1._mu)
 
-print("ParticleBeam")
+print("ParticleBeam, result2: mu")
 print(result2.particles.mean(axis=0))
+
