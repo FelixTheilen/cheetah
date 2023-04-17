@@ -35,14 +35,14 @@ segment.quad.angle = 2e-3
 result1 = segment(beam1)
 result2 = segment(beam2)
 
+print("ParticleBeam, beam2: n")
+print(beam2.n)
+
 print("ParameterBeam, beam1: Energy")
 print(beam1.energy)
 
 print("ParticleBeam, beam2: Energy")
 print(beam2.energy)
-
-print("ParticleBeam, beam2: n")
-print(beam2.n)
 
 print("ParameterBeam, beam1: cov")
 print(beam1._cov)
@@ -56,3 +56,12 @@ print(result1._mu)
 print("ParticleBeam, result2: mu")
 print(result2.particles.mean(axis=0))
 
+#Results
+print("ParticleBeam, result2: n")
+print(result2.n)
+
+print("ParameterBeam, result1: Energy")
+print(result1.energy)
+
+print("ParticleBeam, result2: Energy")
+print(result2.energy)

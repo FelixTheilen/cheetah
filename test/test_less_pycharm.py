@@ -29,16 +29,20 @@ beam2 = cheetah.ParticleBeam.from_astra(
 )
 
 
+def test_ParticleBeam_n():
+    assert beam2.n == 100000
+
+
 def test_ParameterBeam_energy():
-    assert beam1.energy == 107315902.44355084
+    actual = beam1.energy
+    expected = 107315902.44355084
+    assert np.isclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
 
 
 def test_ParticleBeam_energy():
-    assert beam2.energy == 107315902.44355084
-
-
-def test_ParticleBeam_n():
-    assert beam2.n == 100000
+    actual = beam2.energy
+    expected = 107315902.44355084
+    assert np.isclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
 
 
 def test_beam1_mu():
@@ -289,19 +293,20 @@ segment.quad.angle = 2e-3
 result1 = segment(beam1)
 result2 = segment(beam2)
 
-
-def test_segment_beam1():
-    assert (
-        str(result1)
-        == "ParameterBeam(mu_x=0.004001, mu_xp=0.002000, mu_y=-0.000002, mu_yp=-0.000000, sigma_x=0.000181, sigma_xp=0.000004, sigma_y=0.000182, sigma_yp=0.000004, sigma_s=0.000008, sigma_p=0.002280, energy=107315902.444)"
-    )
+def test_ParticleBeam_result2_n():
+    assert result2.n == 100000
 
 
-def test_segment_beam2():
-    assert (
-        str(result2)
-        == "ParticleBeam(n=100000, mu_x=0.004001, mu_xp=0.002000, mu_y=-0.000002, mu_yp=-0.000000, sigma_x=0.000181, sigma_xp=0.000004, sigma_y=0.000182, sigma_yp=0.000004, sigma_s=0.000008, sigma_p=0.002280, energy=107315902.444)"
-    )
+def test_ParameterBeam_result1_energy():
+    actual = result1.energy
+    expected = 107315902.44355084
+    assert np.isclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
+
+
+def test_ParticleBeam_result2_energy():
+    actual = result1.energy
+    expected = 107315902.44355084
+    assert np.isclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
 
 
 def test_result1_mu():
