@@ -20,9 +20,9 @@ sys.path.append(
     "C:/Users/felix theilen/appdata/local/programs/python/python310/lib/site-packages"
 )
 
+segment = Segment.from_ocelot(ares.cell)
 
 def test_import():
-    segment = Segment.from_ocelot(ares.cell)
     assert str(segment) == str(
         Segment(
             [
