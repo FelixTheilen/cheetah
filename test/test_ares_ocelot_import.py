@@ -1,5 +1,3 @@
-import sys
-
 import ARESlatticeStage3v1_9 as ares
 from cheetah import (
     BPM,
@@ -12,15 +10,8 @@ from cheetah import (
     VerticalCorrector,
 )
 
-"""
-sys.path.append("C:/Users/ftheilen/Source/ocelot")
-"""
-sys.path.append("D:/Fachpraktikum_DESY/GitHub/ocelot-master")
-sys.path.append(
-    "C:/Users/felix theilen/appdata/local/programs/python/python310/lib/site-packages"
-)
-
 segment = Segment.from_ocelot(ares.cell)
+
 
 def test_import():
     assert str(segment) == str(
