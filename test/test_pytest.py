@@ -373,8 +373,44 @@ def test_beam4_cov():
     )
     assert np.allclose(actual, expected, atol=1e-05, rtol=1e-08, equal_nan=False)
 
-def test():
-    assert np.allclose(np.cov(beam2.particles.t().numpy()), np.cov(beam4.particles.t().numpy()), atol=1e-05, rtol=1e-08, equal_nan=False)
 
-def test_2():
-    assert np.allclose(beam1._cov, beam3._cov, atol=1e-05, rtol=1e-08, equal_nan=False)
+def test_energy_1_3():
+    assert np.isclose(
+        beam1.energy, beam2.energy, atol=1e-15, rtol=1e-08, equal_nan=False
+    )
+
+
+def test_energy_2_4():
+    assert np.isclose(
+        beam2.energy, beam4.energy, atol=1e-15, rtol=1e-08, equal_nan=False
+    )
+
+
+def test_mu_1_3():
+    assert torch.allclose(beam1._mu, beam3._mu, atol=1e-15, rtol=1e-08, equal_nan=False)
+
+
+def test_mean_2_4():
+    assert np.allclose(
+        beam2.particles.mean(axis=0),
+        beam4.particles.mean(axis=0),
+        atol=1e-15,
+        rtol=1e-08,
+        equal_nan=False,
+    )
+
+
+def test_cov_1_3():
+    assert np.allclose(
+        np.cov(beam2.particles.t().numpy()),
+        np.cov(beam4.particles.t().numpy()),
+        atol=1e-15,
+        rtol=1e-08,
+        equal_nan=False,
+    )
+
+
+def test_cov_2_4():
+    assert torch.allclose(
+        beam1._cov, beam3._cov, atol=1e-15, rtol=1e-08, equal_nan=False
+    )
