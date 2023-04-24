@@ -42,7 +42,7 @@ def test_ParameterBeam_mu():
         ],
         dtype=torch.float32,
     )
-    assert torch.allclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
+    assert torch.allclose(actual, expected, rtol=1e-5, atol=1e-9, equal_nan=False)
 
 
 def test_ParticleBeam_particles_mean():
@@ -59,12 +59,12 @@ def test_ParticleBeam_particles_mean():
         ],
         dtype=torch.float32,
     )
-    assert torch.allclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
+    assert torch.allclose(actual, expected, rtol=1e-5, atol=1e-9, equal_nan=False)
 
 
 def test_ParameterBeam_ParticleBeam_mu_dif():
     assert torch.allclose(
-        beam1._mu, beam2.particles.mean(axis=0), rtol=1e-5, atol=1e-8, equal_nan=False
+        beam1._mu, beam2.particles.mean(axis=0), rtol=1e-5, atol=1e-9, equal_nan=False
     )
 
 
@@ -137,7 +137,7 @@ def test_ParameterBeam_cov():
             ],
         ]
     )
-    assert torch.allclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
+    assert torch.allclose(actual, expected, rtol=1e-3, atol=1e-16, equal_nan=False)
 
 
 def test_ParticleBeam_cov():
@@ -209,7 +209,7 @@ def test_ParticleBeam_cov():
             ],
         ]
     )
-    assert np.allclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
+    assert np.allclose(actual, expected, rtol=1e-3, atol=1e-16, equal_nan=False)
 
 
 def test_ParameterBeam_ParticleBeam_cov_dif():
@@ -217,7 +217,7 @@ def test_ParameterBeam_ParticleBeam_cov_dif():
         beam1._cov,
         np.cov(beam2.particles.t().numpy()),
         rtol=1e-5,
-        atol=1e-8,
+        atol=1e-16,
         equal_nan=False,
     )
 
@@ -260,7 +260,7 @@ def test_ParameterBeam_result1_mu():
             1.0000e00,
         ]
     )
-    assert np.allclose(actual, expected, rtol=1e-3, atol=1e-8, equal_nan=False)
+    assert np.allclose(actual, expected, rtol=1e-3, atol=1e-9, equal_nan=False)
 
 
 def test_ParticleBeam_result2_particles_mean():
@@ -276,7 +276,7 @@ def test_ParticleBeam_result2_particles_mean():
             1.0000e00,
         ]
     )
-    assert np.allclose(actual, expected, rtol=1e-3, atol=1e-8, equal_nan=False)
+    assert np.allclose(actual, expected, rtol=1e-3, atol=1e-9, equal_nan=False)
 
 
 def test_ParameterBeam_result1_ParticleBeam_result2_mu_dif():
@@ -284,7 +284,7 @@ def test_ParameterBeam_result1_ParticleBeam_result2_mu_dif():
         result1._mu,
         result2.particles.mean(axis=0),
         rtol=1e-5,
-        atol=1e-8,
+        atol=1e-9,
         equal_nan=False,
     )
 
@@ -358,7 +358,7 @@ def test_ParameterBeam_result1_cov():
             ],
         ]
     )
-    assert torch.allclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
+    assert torch.allclose(actual, expected, rtol=1e-3, atol=1e-16, equal_nan=False)
 
 
 def test_ParticleBeam_result2_cov():
@@ -430,14 +430,14 @@ def test_ParticleBeam_result2_cov():
             ],
         ]
     )
-    assert np.allclose(actual, expected, rtol=1e-05, atol=1e-14, equal_nan=False)
+    assert np.allclose(actual, expected, rtol=1e-05, atol=1e-16, equal_nan=False)
 
 
 def test_ParameterBeam_result1_ParticleBeam_result2_cov_dif():
     assert np.allclose(
         result1._cov,
         np.cov(result2.particles.t().numpy()),
-        rtol=1e-3,
-        atol=1e-8,
+        rtol=1e-2,
+        atol=1e-16,
         equal_nan=True,
     )
