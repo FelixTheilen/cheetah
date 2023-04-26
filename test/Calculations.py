@@ -1,35 +1,49 @@
-import cheetah
 import numpy as np
+import torch
+import ARESlatticeStage3v1_9 as ares
+from cheetah import (
+    BPM,
+    Cavity,
+    Drift,
+    HorizontalCorrector,
+    Quadrupole,
+    Screen,
+    Segment,
+    VerticalCorrector,
+    Undulator,
+    ParticleBeam,
+    ParameterBeam
+)
 
-ParameterBeam = cheetah.ParameterBeam.from_astra(
+ParameterBeam = ParameterBeam.from_astra(
     "../benchmark/cheetah/ACHIP_EA1_2021.1351.001"
 )
-ParticleBeam = cheetah.ParticleBeam.from_astra(
+ParticleBeam = ParticleBeam.from_astra(
     "../benchmark/cheetah/ACHIP_EA1_2021.1351.001"
 )
 
-Drift = cheetah.Segment([cheetah.Drift(length=0.02, name="element")])
+Drift = Segment([Drift(length=0.02, name="element")])
 
-HorizontalCorrector = cheetah.Segment(
-    [cheetah.HorizontalCorrector(length=0.02, name="element")]
+HorizontalCorrector = Segment(
+    [HorizontalCorrector(length=0.02, name="element")]
 )
 HorizontalCorrector.element.angle = 2e-3
 
-VerticalCorrector = cheetah.Segment(
-    [cheetah.VerticalCorrector(length=0.02, name="element")]
+VerticalCorrector = Segment(
+    [VerticalCorrector(length=0.02, name="element")]
 )
 VerticalCorrector.element.angle = 2e-3
 
-Cavity = cheetah.Segment([cheetah.Cavity(length=0.02, name="element")])
+Cavity = Segment([Cavity(length=0.02, name="element")])
 Cavity.element.delta_energy = 1000
 
-BPM = cheetah.Segment([cheetah.BPM(name="element")])
+BPM = Segment([BPM(name="element")])
 
-Screen = cheetah.Segment(
-    [cheetah.Screen(resolution=(1000, 1000), pixel_size=1, name="element")]
+Screen = Segment(
+    [Screen(resolution=(1000, 1000), pixel_size=1, name="element")]
 )
 
-Undulator = cheetah.Segment([cheetah.Undulator(length=0.02, name="element")])
+Undulator = Segment([Undulator(length=0.02, name="element")])
 
 HorizontalCorrector_ParameterBeam = HorizontalCorrector(ParameterBeam)
 HorizontalCorrector_ParticleBeam = HorizontalCorrector(ParticleBeam)
@@ -48,6 +62,12 @@ Screen_ParticleBeam = Screen(ParticleBeam)
 
 Undulator_ParameterBeam = Undulator(ParameterBeam)
 Undulator_ParticleBeam = Undulator(ParticleBeam)
+
+#Final
+segment = Segment.from_ocelot(ares.cell)
+
+result1 = segment(ParameterBeam)
+result2 = segment(ParticleBeam)
 
 print("ParticleBeam_n = {}".format(ParticleBeam.n))
 
@@ -216,3 +236,6 @@ print(
         np.cov(Undulator_ParticleBeam.particles.t().numpy())
     )
 )
+
+#Final
+

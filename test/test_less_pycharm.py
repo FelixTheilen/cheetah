@@ -1,11 +1,17 @@
-import sys
-
-import cheetah
 import numpy as np
 import torch
-
-sys.path.append(
-    "c:/users/ftheilen/appdata/local/packages/pythonsoftwarefoundation.python.3.10_qbz5n2kfra8p0/localcache/local-packages/python310/site-packages"
+import ARESlatticeStage3v1_9 as ares
+from cheetah import (
+    BPM,
+    Cavity,
+    Drift,
+    HorizontalCorrector,
+    Quadrupole,
+    Screen,
+    Segment,
+    VerticalCorrector,
+    ParameterBeam,
+    ParticleBeam
 )
 
 """
@@ -13,8 +19,8 @@ Test Beam, which can be found in GitHub in the folder benchmark/cheetah/ACHIP_EA
 """
 
 
-beam1 = cheetah.ParameterBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
-beam2 = cheetah.ParticleBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
+beam1 = ParameterBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
+beam2 = ParticleBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
 
 
 def test_ParticleBeam_n():
@@ -227,10 +233,7 @@ def test_ParameterBeam_ParticleBeam_cov_dif():
     )
 
 
-segment = cheetah.Segment(
-    [cheetah.HorizontalCorrector(length=0.02, name="quad"), cheetah.Drift(length=2.0)]
-)
-segment.quad.angle = 2e-3
+segment = Segment.from_ocelot(ares.cell)
 
 result1 = segment(beam1)
 result2 = segment(beam2)
