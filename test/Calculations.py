@@ -25,7 +25,9 @@ Cavity.element.delta_energy = 1000
 
 BPM = cheetah.Segment([cheetah.BPM(name="element")])
 
-Screen = cheetah.Segment([cheetah.Screen(resolution=(1000, 1000),pixel_size=1, name="element")])
+Screen = cheetah.Segment(
+    [cheetah.Screen(resolution=(1000, 1000), pixel_size=1, name="element")]
+)
 
 Undulator = cheetah.Segment([cheetah.Undulator(length=0.02, name="element")])
 
@@ -105,19 +107,43 @@ print(
 # Vertical Corrector
 print("VerticalCorrector_ParticleBeam_n = {}".format(VerticalCorrector_ParticleBeam.n))
 
-print("VerticalCorrector_ParameterBeam_Energy = {}".format(VerticalCorrector_ParameterBeam.energy))
+print(
+    "VerticalCorrector_ParameterBeam_Energy = {}".format(
+        VerticalCorrector_ParameterBeam.energy
+    )
+)
 
-print("VerticalCorrector_ParticleBeam_Energy = {}".format(VerticalCorrector_ParticleBeam.energy))
+print(
+    "VerticalCorrector_ParticleBeam_Energy = {}".format(
+        VerticalCorrector_ParticleBeam.energy
+    )
+)
 
-print("VerticalCorrector_ParameterBeam_mu = {}".format(VerticalCorrector_ParameterBeam._mu))
+print(
+    "VerticalCorrector_ParameterBeam_mu = {}".format(
+        VerticalCorrector_ParameterBeam._mu
+    )
+)
 
-print("VerticalCorrector_ParticleBeam_mu = {}".format(VerticalCorrector_ParticleBeam.particles.mean(axis=0)))
+print(
+    "VerticalCorrector_ParticleBeam_mu = {}".format(
+        VerticalCorrector_ParticleBeam.particles.mean(axis=0)
+    )
+)
 
-print("VerticalCorrector_ParameterBeam_cov = {}".format(VerticalCorrector_ParameterBeam._cov))
+print(
+    "VerticalCorrector_ParameterBeam_cov = {}".format(
+        VerticalCorrector_ParameterBeam._cov
+    )
+)
 
-print("VerticalCorrector_ParticleBeam_cov = {}".format(np.cov(VerticalCorrector_ParticleBeam.particles.t().numpy())))
+print(
+    "VerticalCorrector_ParticleBeam_cov = {}".format(
+        np.cov(VerticalCorrector_ParticleBeam.particles.t().numpy())
+    )
+)
 
-#Cavity
+# Cavity
 print("Cavity_ParticleBeam_n = {}".format(Cavity_ParticleBeam.n))
 
 print("Cavity_ParameterBeam_Energy = {}".format(Cavity_ParameterBeam.energy))
@@ -132,7 +158,7 @@ print("Cavity_ParameterBeam_cov = {}".format(Cavity_ParameterBeam._cov))
 
 print("ParticleBeam_cov = {}".format(np.cov(Cavity_ParticleBeam.particles.t().numpy())))
 
-#BPM
+# BPM
 print("BPM_ParticleBeam_n = {}".format(BPM_ParticleBeam.n))
 
 print("BPM_ParameterBeam_Energy = {}".format(BPM_ParameterBeam.energy))
@@ -145,9 +171,11 @@ print("BPM_ParticleBeam_mu = {}".format(BPM_ParticleBeam.particles.mean(axis=0))
 
 print("BPM_ParameterBeam_cov = {}".format(BPM_ParameterBeam._cov))
 
-print("BPM_ParticleBeam_cov = {}".format(np.cov(BPM_ParticleBeam.particles.t().numpy())))
+print(
+    "BPM_ParticleBeam_cov = {}".format(np.cov(BPM_ParticleBeam.particles.t().numpy()))
+)
 
-#Screen
+# Screen
 print("Screen_ParticleBeam_n = {}".format(Screen_ParticleBeam.n))
 
 print("Screen_ParameterBeam_Energy = {}".format(Screen_ParameterBeam.energy))
@@ -160,9 +188,13 @@ print("Screen_ParticleBeam_mu = {}".format(Screen_ParticleBeam.particles.mean(ax
 
 print("Screen_ParameterBeam_cov = {}".format(Screen_ParameterBeam._cov))
 
-print("Screen_ParticleBeam_cov = {}".format(np.cov(Screen_ParticleBeam.particles.t().numpy())))
+print(
+    "Screen_ParticleBeam_cov = {}".format(
+        np.cov(Screen_ParticleBeam.particles.t().numpy())
+    )
+)
 
-#Undulator
+# Undulator
 print("Undulator_ParticleBeam_n = {}".format(Undulator_ParticleBeam.n))
 
 print("Undulator_ParameterBeam_Energy = {}".format(Undulator_ParameterBeam.energy))
@@ -171,8 +203,16 @@ print("Undulator_ParticleBeam_Energy = {}".format(Undulator_ParticleBeam.energy)
 
 print("Undulator_ParameterBeam_mu = {}".format(Undulator_ParameterBeam._mu))
 
-print("Undulator_ParticleBeam_mu = {}".format(Undulator_ParticleBeam.particles.mean(axis=0)))
+print(
+    "Undulator_ParticleBeam_mu = {}".format(
+        Undulator_ParticleBeam.particles.mean(axis=0)
+    )
+)
 
 print("Undulator_ParameterBeam_cov = {}".format(Undulator_ParameterBeam._cov))
 
-print("Undulator_ParticleBeam_cov = {}".format(np.cov(Undulator_ParticleBeam.particles.t().numpy())))
+print(
+    "Undulator_ParticleBeam_cov = {}".format(
+        np.cov(Undulator_ParticleBeam.particles.t().numpy())
+    )
+)
