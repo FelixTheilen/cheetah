@@ -66,9 +66,10 @@ Undulator_ParticleBeam = Undulator(ParticleBeam)
 #Final
 segment = Segment.from_ocelot(ares.cell)
 
-result1 = segment(ParameterBeam)
-result2 = segment(ParticleBeam)
+FinalTestResult_ParameterBeam = segment(ParameterBeam)
+FinalTestResult_ParticleBeam = segment(ParticleBeam)
 
+#Beams
 print("ParticleBeam_n = {}".format(ParticleBeam.n))
 
 print("ParameterBeam_Energy = {}".format(ParameterBeam.energy))
@@ -238,4 +239,16 @@ print(
 )
 
 #Final
+print("FinalTestResult_ParticleBeam_n = {}".format(FinalTestResult_ParticleBeam.n))
 
+print("FinalTestResult_ParameterBeam_Energy = {}".format(FinalTestResult_ParameterBeam.energy))
+
+print("FinalTestResult_ParticleBeam_Energy = {}".format(FinalTestResult_ParticleBeam.energy))
+
+print("FinalTestResult_ParameterBeam_mu = {}".format(FinalTestResult_ParameterBeam._mu))
+
+print("FinalTestResult_ParticleBeam_mu = {}".format(FinalTestResult_ParticleBeam.particles.mean(axis=0)))
+
+print("FinalTestResult_ParameterBeam_cov = {}".format(FinalTestResult_ParameterBeam._cov))
+
+print("FinalTestResult_ParticleBeam_cov = {}".format(np.cov(FinalTestResult_ParticleBeam.particles.t().numpy())))
