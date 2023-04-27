@@ -1,46 +1,40 @@
+import ARESlatticeStage3v1_9 as ares
 import numpy as np
 import torch
-import ARESlatticeStage3v1_9 as ares
 from cheetah import (
-    BPM,
-    Cavity,
-    Drift,
-    HorizontalCorrector,
-    Quadrupole,
-    Screen,
-    Segment,
-    VerticalCorrector,
     ParameterBeam,
     ParticleBeam,
+    Segment
 )
 
 """
-Test Beam, which can be found in GitHub in the folder benchmark/cheetah/ACHIP_EA1_2021.1351.001
+Test Beam, which can be found in GitHub in the folder
+benchmark/cheetah/ACHIP_EA1_2021.1351.001
 """
 
 
-beam1 = ParameterBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
-beam2 = ParticleBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
+ParameterBeam = ParameterBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
+ParticleBeam = ParticleBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
 
 
 def test_ParticleBeam_n():
-    assert beam2.n == 100000
+    assert ParticleBeam.n == 100000
 
 
 def test_ParameterBeam_energy():
-    actual = beam1.energy
+    actual = ParameterBeam.energy
     expected = 107315902.44355084
     assert np.isclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
 
 
 def test_ParticleBeam_energy():
-    actual = beam2.energy
+    actual = ParticleBeam.energy
     expected = 107315902.44355084
     assert np.isclose(actual, expected, rtol=1e-5, atol=1e-8, equal_nan=False)
 
 
 def test_ParameterBeam_mu():
-    actual = beam1._mu
+    actual = ParameterBeam._mu
     expected = torch.tensor(
         [
             8.2413e-07,
@@ -57,7 +51,7 @@ def test_ParameterBeam_mu():
 
 
 def test_ParticleBeam_particles_mean():
-    actual = beam2.particles.mean(axis=0)
+    actual = ParticleBeam.particles.mean(axis=0)
     expected = torch.tensor(
         [
             8.2413e-07,
@@ -75,12 +69,16 @@ def test_ParticleBeam_particles_mean():
 
 def test_ParameterBeam_ParticleBeam_mu_dif():
     assert torch.allclose(
-        beam1._mu, beam2.particles.mean(axis=0), rtol=1e-5, atol=1e-8, equal_nan=False
+        ParameterBeam._mu,
+        ParticleBeam.particles.mean(axis=0),
+        rtol=1e-5,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_ParameterBeam_cov():
-    actual = beam1._cov
+    actual = ParameterBeam._cov
     expected = torch.tensor(
         [
             [
@@ -152,7 +150,7 @@ def test_ParameterBeam_cov():
 
 
 def test_ParticleBeam_cov():
-    actual = np.cov(beam2.particles.t().numpy())
+    actual = np.cov(ParticleBeam.particles.t().numpy())
     expected = np.array(
         [
             [
@@ -225,8 +223,8 @@ def test_ParticleBeam_cov():
 
 def test_ParameterBeam_ParticleBeam_cov_dif():
     assert np.allclose(
-        beam1._cov,
-        np.cov(beam2.particles.t().numpy()),
+        ParameterBeam._cov,
+        np.cov(ParticleBeam.particles.t().numpy()),
         rtol=1e-5,
         atol=1e-8,
         equal_nan=False,

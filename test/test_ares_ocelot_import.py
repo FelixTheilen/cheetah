@@ -12,7 +12,6 @@ from cheetah import (
 
 segment = Segment.from_ocelot(ares.cell)
 
-
 def test_import():
     assert str(segment) == str(
         Segment(
