@@ -1,11 +1,7 @@
 import ARESlatticeStage3v1_9 as ares
 import numpy as np
 import torch
-from cheetah import (
-    ParameterBeam,
-    ParticleBeam,
-    Segment
-)
+from cheetah import ParameterBeam, ParticleBeam, Segment
 
 """
 Test Beam, which can be found in GitHub in the folder

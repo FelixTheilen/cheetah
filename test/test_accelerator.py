@@ -15,8 +15,13 @@ ParticleBeam = cheetah.ParticleBeam.from_astra(
     "../benchmark/cheetah/ACHIP_EA1_2021.1351.001"
 )
 
-#Segments
+# Segments
 Drift = cheetah.Segment([cheetah.Drift(length=0.02, name="element")])
+
+Quadrupole = cheetah.Segment(
+    [cheetah.Quadrupole(length=0.02, misalignment=(1, 1), name="element")]
+)
+Quadrupole.element.k1 = 200
 
 HorizontalCorrector = cheetah.Segment(
     [cheetah.HorizontalCorrector(length=0.02, name="element")]
@@ -39,9 +44,12 @@ Screen = cheetah.Segment(
 
 Undulator = cheetah.Segment([cheetah.Undulator(length=0.02, name="element")])
 
-#Segments applied on Beams
+# Segments applied on Beams
 HorizontalCorrector_ParameterBeam = HorizontalCorrector(ParameterBeam)
 HorizontalCorrector_ParticleBeam = HorizontalCorrector(ParticleBeam)
+
+Quadrupole_ParameterBeam = Quadrupole(ParameterBeam)
+Quadrupole_ParticleBeam = Quadrupole(ParticleBeam)
 
 VerticalCorrector_ParameterBeam = VerticalCorrector(ParameterBeam)
 VerticalCorrector_ParticleBeam = VerticalCorrector(ParticleBeam)
@@ -58,7 +66,7 @@ Screen_ParticleBeam = Screen(ParticleBeam)
 Undulator_ParameterBeam = Undulator(ParameterBeam)
 Undulator_ParticleBeam = Undulator(ParticleBeam)
 
-#Expected Results
+# Expected Results
 ParticleBeam_n = 100000
 ParameterBeam_Energy = 107315902.44355084
 ParticleBeam_Energy = 107315902.44355084
@@ -195,6 +203,139 @@ ParticleBeam_cov = [
         3.39481957e-11,
         5.36516751e-12,
         3.00400242e-09,
+        5.20046739e-06,
+        0.00000000e00,
+    ],
+    [
+        0.00000000e00,
+        0.00000000e00,
+        0.00000000e00,
+        0.00000000e00,
+        0.00000000e00,
+        0.00000000e00,
+        0.00000000e00,
+    ],
+]
+Quadrupole_ParticleBeam_n = 100000
+Quadrupole_ParameterBeam_Energy = 107315902.44355084
+Quadrupole_ParticleBeam_Energy = 107315902.44355084
+Quadrupole_ParameterBeam_mu = torch.tensor(
+    [3.9735e-02, 3.9469e00, -4.0269e-02, -4.0536e00, 5.7248e-06, 3.8292e-04, 1.0000e00]
+)
+Quadrupole_ParticleBeam_mu = torch.tensor(
+    [3.9735e-02, 3.9469e00, -4.0269e-02, -4.0536e00, 5.7248e-06, 3.8292e-04, 1.0000e00]
+)
+Quadrupole_ParameterBeam_cov = torch.tensor(
+    [
+        [
+            2.8228e-08,
+            -1.1546e-07,
+            8.0754e-13,
+            3.3509e-12,
+            -6.1484e-13,
+            -7.3875e-12,
+            0.0000e00,
+        ],
+        [
+            -1.1546e-07,
+            4.7231e-07,
+            -3.2122e-12,
+            -1.3350e-11,
+            2.4887e-12,
+            3.0280e-11,
+            0.0000e00,
+        ],
+        [
+            8.0754e-13,
+            -3.2122e-12,
+            3.3239e-08,
+            1.3008e-07,
+            6.2988e-13,
+            3.5424e-11,
+            0.0000e00,
+        ],
+        [
+            3.3509e-12,
+            -1.3350e-11,
+            1.3008e-07,
+            5.0908e-07,
+            2.5164e-12,
+            1.4319e-10,
+            0.0000e00,
+        ],
+        [
+            -6.1484e-13,
+            2.4887e-12,
+            6.2988e-13,
+            2.5164e-12,
+            6.4182e-11,
+            3.0016e-09,
+            0.0000e00,
+        ],
+        [
+            -7.3875e-12,
+            3.0280e-11,
+            3.5424e-11,
+            1.4319e-10,
+            3.0016e-09,
+            5.2005e-06,
+            0.0000e00,
+        ],
+        [0.0000e00, 0.0000e00, 0.0000e00, 0.0000e00, 0.0000e00, 0.0000e00, 0.0000e00],
+    ]
+)
+Quadrupole_ParticleBeam_cov = [
+    [
+        2.82278032e-08,
+        -1.15464668e-07,
+        8.08104574e-13,
+        3.36715289e-12,
+        -6.14818644e-13,
+        -7.38039434e-12,
+        0.00000000e00,
+    ],
+    [
+        -1.15464668e-07,
+        4.72307166e-07,
+        -3.25763334e-12,
+        -1.35833965e-11,
+        2.48985351e-12,
+        2.99345454e-11,
+        0.00000000e00,
+    ],
+    [
+        8.08104574e-13,
+        -3.25763334e-12,
+        3.32387494e-08,
+        1.30080308e-07,
+        6.29891413e-13,
+        3.54257524e-11,
+        0.00000000e00,
+    ],
+    [
+        3.36715289e-12,
+        -1.35833965e-11,
+        1.30080308e-07,
+        5.09074253e-07,
+        2.52182982e-12,
+        1.42098403e-10,
+        0.00000000e00,
+    ],
+    [
+        -6.14818644e-13,
+        2.48985351e-12,
+        6.29891413e-13,
+        2.52182982e-12,
+        6.41822474e-11,
+        3.00164415e-09,
+        0.00000000e00,
+    ],
+    [
+        -7.38039434e-12,
+        2.99345454e-11,
+        3.54257524e-11,
+        1.42098403e-10,
+        3.00164415e-09,
         5.20046739e-06,
         0.00000000e00,
     ],
@@ -1087,7 +1228,8 @@ Undulator_ParticleBeam_cov = [
     ],
 ]
 
-#Tests
+
+# Tests
 def test_ParticleBeam_n():
     assert ParticleBeam.n == ParticleBeam_n
 
@@ -1147,6 +1289,73 @@ def test_ParameterBeam_ParticleBeam_cov_dif():
         ParameterBeam._cov,
         np.cov(ParticleBeam.particles.t().numpy()),
         rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
+    )
+
+
+# Quadrupole
+def test_Quadrupole_ParticleBeam_n():
+    assert Quadrupole_ParticleBeam.n == Quadrupole_ParticleBeam_n
+
+
+def test_Quadrupole_ParameterBeam_Energy():
+    actual = Quadrupole_ParameterBeam.energy
+    assert np.isclose(
+        actual, Quadrupole_ParameterBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+    )
+
+
+def test_Quadrupole_ParticleBeam_Energy():
+    actual = Quadrupole_ParticleBeam.energy
+    assert np.isclose(
+        actual, Quadrupole_ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+    )
+
+
+def test_Quadrupole_ParameterBeam_mu():
+    actual = Quadrupole_ParameterBeam._mu
+    assert torch.allclose(
+        actual, Quadrupole_ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+    )
+
+
+def test_Quadrupole_ParticleBeam_mu():
+    actual = Quadrupole_ParticleBeam.particles.mean(axis=0)
+    assert torch.allclose(
+        actual, Quadrupole_ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+    )
+
+
+def test_Quadrupole_ParameterBeam_Quadrupole_ParticleBeam_mu_dif():
+    assert torch.allclose(
+        Quadrupole_ParameterBeam._mu,
+        Quadrupole_ParticleBeam.particles.mean(axis=0),
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
+    )
+
+
+def test_Quadrupole_ParameterBeam_cov():
+    actual = Quadrupole_ParameterBeam._cov
+    assert torch.allclose(
+        actual, Quadrupole_ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+    )
+
+
+def test_Quadrupole_ParticleBeam_cov():
+    actual = np.cov(Quadrupole_ParticleBeam.particles.t().numpy())
+    assert np.allclose(
+        actual, Quadrupole_ParticleBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+    )
+
+
+def test_Quadrupole_ParameterBeam_Quadrupole_ParticleBeam_cov_dif():
+    assert np.allclose(
+        Quadrupole_ParameterBeam._cov,
+        np.cov(Quadrupole_ParticleBeam.particles.t().numpy()),
+        rtol=1e-1,
         atol=1e-16,
         equal_nan=False,
     )

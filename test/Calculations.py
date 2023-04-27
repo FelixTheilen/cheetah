@@ -1,37 +1,31 @@
-import numpy as np
-import torch
 import ARESlatticeStage3v1_9 as ares
+import numpy as np
 from cheetah import (
     BPM,
     Cavity,
     Drift,
     HorizontalCorrector,
+    ParameterBeam,
+    ParticleBeam,
     Quadrupole,
     Screen,
     Segment,
-    VerticalCorrector,
     Undulator,
-    ParticleBeam,
-    ParameterBeam
+    VerticalCorrector,
 )
 
-ParameterBeam = ParameterBeam.from_astra(
-    "../benchmark/cheetah/ACHIP_EA1_2021.1351.001"
-)
-ParticleBeam = ParticleBeam.from_astra(
-    "../benchmark/cheetah/ACHIP_EA1_2021.1351.001"
-)
+ParameterBeam = ParameterBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
+ParticleBeam = ParticleBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
 
 Drift = Segment([Drift(length=0.02, name="element")])
 
-HorizontalCorrector = Segment(
-    [HorizontalCorrector(length=0.02, name="element")]
-)
+Quadrupole = Segment([Quadrupole(length=0.02, misalignment=(1, 1), name="element")])
+Quadrupole.element.k1 = 200
+
+HorizontalCorrector = Segment([HorizontalCorrector(length=0.02, name="element")])
 HorizontalCorrector.element.angle = 2e-3
 
-VerticalCorrector = Segment(
-    [VerticalCorrector(length=0.02, name="element")]
-)
+VerticalCorrector = Segment([VerticalCorrector(length=0.02, name="element")])
 VerticalCorrector.element.angle = 2e-3
 
 Cavity = Segment([Cavity(length=0.02, name="element")])
@@ -39,11 +33,12 @@ Cavity.element.delta_energy = 1000
 
 BPM = Segment([BPM(name="element")])
 
-Screen = Segment(
-    [Screen(resolution=(1000, 1000), pixel_size=1, name="element")]
-)
+Screen = Segment([Screen(resolution=(1000, 1000), pixel_size=1, name="element")])
 
 Undulator = Segment([Undulator(length=0.02, name="element")])
+
+Quadrupole_ParameterBeam = Quadrupole(ParameterBeam)
+Quadrupole_ParticleBeam = Quadrupole(ParticleBeam)
 
 HorizontalCorrector_ParameterBeam = HorizontalCorrector(ParameterBeam)
 HorizontalCorrector_ParticleBeam = HorizontalCorrector(ParticleBeam)
@@ -63,13 +58,13 @@ Screen_ParticleBeam = Screen(ParticleBeam)
 Undulator_ParameterBeam = Undulator(ParameterBeam)
 Undulator_ParticleBeam = Undulator(ParticleBeam)
 
-#Final
+# Final
 segment = Segment.from_ocelot(ares.cell)
 
 FinalTestResult_ParameterBeam = segment(ParameterBeam)
 FinalTestResult_ParticleBeam = segment(ParticleBeam)
 
-#Beams
+# Beams
 print("ParticleBeam_n = {}".format(ParticleBeam.n))
 
 print("ParameterBeam_Energy = {}".format(ParameterBeam.energy))
@@ -83,6 +78,29 @@ print("ParticleBeam_mu = {}".format(ParticleBeam.particles.mean(axis=0)))
 print("ParameterBeam_cov = {}".format(ParameterBeam._cov))
 
 print("ParticleBeam_cov = {}".format(np.cov(ParticleBeam.particles.t().numpy())))
+
+# Quadrupole
+print("Quadrupole_ParticleBeam_n = {}".format(Quadrupole_ParticleBeam.n))
+
+print("Quadrupole_ParameterBeam_Energy = {}".format(Quadrupole_ParameterBeam.energy))
+
+print("Quadrupole_ParticleBeam_Energy = {}".format(Quadrupole_ParticleBeam.energy))
+
+print("Quadrupole_ParameterBeam_mu = {}".format(Quadrupole_ParameterBeam._mu))
+
+print(
+    "Quadrupole_ParticleBeam_mu = {}".format(
+        Quadrupole_ParticleBeam.particles.mean(axis=0)
+    )
+)
+
+print("Quadrupole_ParameterBeam_cov = {}".format(Quadrupole_ParameterBeam._cov))
+
+print(
+    "Quadrupole_ParticleBeam_cov = {}".format(
+        np.cov(Quadrupole_ParticleBeam.particles.t().numpy())
+    )
+)
 
 # Horizontal Corrector
 print(
@@ -238,17 +256,35 @@ print(
     )
 )
 
-#Final
+# Final
 print("FinalTestResult_ParticleBeam_n = {}".format(FinalTestResult_ParticleBeam.n))
 
-print("FinalTestResult_ParameterBeam_Energy = {}".format(FinalTestResult_ParameterBeam.energy))
+print(
+    "FinalTestResult_ParameterBeam_Energy = {}".format(
+        FinalTestResult_ParameterBeam.energy
+    )
+)
 
-print("FinalTestResult_ParticleBeam_Energy = {}".format(FinalTestResult_ParticleBeam.energy))
+print(
+    "FinalTestResult_ParticleBeam_Energy = {}".format(
+        FinalTestResult_ParticleBeam.energy
+    )
+)
 
 print("FinalTestResult_ParameterBeam_mu = {}".format(FinalTestResult_ParameterBeam._mu))
 
-print("FinalTestResult_ParticleBeam_mu = {}".format(FinalTestResult_ParticleBeam.particles.mean(axis=0)))
+print(
+    "FinalTestResult_ParticleBeam_mu = {}".format(
+        FinalTestResult_ParticleBeam.particles.mean(axis=0)
+    )
+)
 
-print("FinalTestResult_ParameterBeam_cov = {}".format(FinalTestResult_ParameterBeam._cov))
+print(
+    "FinalTestResult_ParameterBeam_cov = {}".format(FinalTestResult_ParameterBeam._cov)
+)
 
-print("FinalTestResult_ParticleBeam_cov = {}".format(np.cov(FinalTestResult_ParticleBeam.particles.t().numpy())))
+print(
+    "FinalTestResult_ParticleBeam_cov = {}".format(
+        np.cov(FinalTestResult_ParticleBeam.particles.t().numpy())
+    )
+)
