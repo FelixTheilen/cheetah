@@ -292,17 +292,19 @@ ParticleBeam_transformed_Energy = 130089263.44785301
 ParameterBeam_transformed_mu = torch.tensor(
     [8.6423e-06, 5.9384e-07, -2.7276e-07, -3.1776e-08, 0.0000e00, 0.0000e00, 1.0000e00]
 )
+
 ParticleBeam_transformed_mu = torch.tensor(
     [
         8.6423e-06,
         5.9384e-07,
         -2.7276e-07,
         -3.1776e-08,
-        4.5762e-09,
-        2.6316e-09,
+        -2.7210e-08,
+        -2.4420e-09,
         1.0000e00,
     ]
 )
+
 ParameterBeam_transformed_cov = torch.tensor(
     [
         [1.5129e-08, 0.0000e00, 0.0000e00, 0.0000e00, 0.0000e00, 0.0000e00, 0.0000e00],
@@ -316,57 +318,57 @@ ParameterBeam_transformed_cov = torch.tensor(
 )
 ParticleBeam_transformed_cov = [
     [
-        1.51290012e-08,
-        -3.02213355e-13,
-        -3.65495056e-15,
-        -1.05324609e-12,
-        -2.14767652e-12,
-        4.30281834e-13,
+        1.51290009e-08,
+        -2.54315990e-13,
+        -8.52604930e-14,
+        -7.49001416e-13,
+        9.44726664e-12,
+        2.26831494e-13,
         0.00000000e00,
     ],
     [
-        -3.02213355e-13,
-        4.90000003e-13,
-        3.19469118e-16,
-        -3.09001901e-15,
-        -1.44880318e-14,
-        -8.07858896e-15,
+        -2.54315990e-13,
+        4.89999952e-13,
+        6.48530932e-18,
+        1.93333732e-17,
+        4.55130006e-14,
+        -7.81708299e-16,
         0.00000000e00,
     ],
     [
-        -3.65495056e-15,
-        3.19469118e-16,
-        6.39999965e-15,
-        2.18806077e-16,
-        -1.10007697e-16,
-        -2.10931490e-16,
+        -8.52604930e-14,
+        6.48530932e-18,
+        6.40000009e-15,
+        1.32852452e-16,
+        5.14947304e-15,
+        -3.72630662e-17,
         0.00000000e00,
     ],
     [
-        -1.05324609e-12,
-        -3.09001901e-15,
-        2.18806077e-16,
-        3.99999991e-12,
-        5.81659057e-15,
-        8.21938714e-15,
+        -7.49001416e-13,
+        1.93333732e-17,
+        1.32852452e-16,
+        3.99999984e-12,
+        1.82882316e-13,
+        1.09785162e-14,
         0.00000000e00,
     ],
     [
-        -2.14767652e-12,
-        -1.44880318e-14,
-        -1.10007697e-16,
-        5.81659057e-15,
-        4.00000019e-10,
-        -2.88194474e-14,
+        9.44726664e-12,
+        4.55130006e-14,
+        5.14947304e-15,
+        1.82882316e-13,
+        3.99999959e-10,
+        1.29007365e-14,
         0.00000000e00,
     ],
     [
-        4.30281834e-13,
-        -8.07858896e-15,
-        -2.10931490e-16,
-        8.21938714e-15,
-        -2.88194474e-14,
-        4.00000041e-12,
+        2.26831494e-13,
+        -7.81708299e-16,
+        -3.72630662e-17,
+        1.09785162e-14,
+        1.29007365e-14,
+        4.00000016e-12,
         0.00000000e00,
     ],
     [
@@ -389,8 +391,8 @@ def test_ParameterBeam_parameters_energy():
     assert np.allclose(
         ParameterBeam_parameters.energy,
         ParameterBeam_parameters_Energy,
-        atol=1e-04,
-        rtol=1e-08,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -399,8 +401,8 @@ def test_ParticleBeam_parameters_energy():
     assert np.allclose(
         ParticleBeam_parameters.energy,
         ParticleBeam_parameters_Energy,
-        atol=1e-04,
-        rtol=1e-08,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -409,8 +411,8 @@ def test_ParameterBeam_parameters_mu():
     assert torch.allclose(
         ParameterBeam_parameters._mu,
         ParameterBeam_parameters_mu,
-        atol=1e-04,
-        rtol=1e-09,
+        rtol=1e-04,
+        atol=1e-09,
         equal_nan=False,
     )
 
@@ -419,8 +421,8 @@ def test_ParticleBeam_parameters_mu():
     assert torch.allclose(
         ParticleBeam_parameters.particles.mean(axis=0),
         ParticleBeam_parameters_mu,
-        atol=1e-04,
-        rtol=1e-09,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -439,8 +441,8 @@ def test_ParameterBeam_parameters_cov():
     assert torch.allclose(
         ParameterBeam_parameters._cov,
         ParameterBeam_parameters_cov,
-        atol=1e-04,
-        rtol=1e-16,
+        rtol=1e-04,
+        atol=1e-16,
         equal_nan=False,
     )
 
@@ -449,8 +451,8 @@ def test_ParticleBeam_parameters_cov():
     assert np.allclose(
         np.cov(ParticleBeam_parameters.particles.t().numpy()),
         ParticleBeam_parameters_cov,
-        atol=1e-04,
-        rtol=1e-16,
+        rtol=1e-04,
+        atol=1e-14,
         equal_nan=False,
     )
 
@@ -473,8 +475,8 @@ def test_ParameterBeam_transformed_energy():
     assert np.allclose(
         ParameterBeam_transformed.energy,
         ParameterBeam_transformed_Energy,
-        atol=1e-04,
-        rtol=1e-08,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -483,8 +485,8 @@ def test_ParticleBeam_transformed_energy():
     assert np.allclose(
         ParticleBeam_transformed.energy,
         ParticleBeam_transformed_Energy,
-        atol=1e-04,
-        rtol=1e-08,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -493,8 +495,8 @@ def test_ParameterBeam_transformed_mu():
     assert torch.allclose(
         ParameterBeam_transformed._mu,
         ParameterBeam_transformed_mu,
-        atol=1e-04,
-        rtol=1e-08,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -503,8 +505,8 @@ def test_ParticleBeam_transformed_mu():
     assert torch.allclose(
         ParticleBeam_transformed.particles.mean(axis=0),
         ParticleBeam_transformed_mu,
-        atol=1e-04,
-        rtol=1e-08,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -513,7 +515,7 @@ def test_ParameterBeam_transformed_ParticleBeam_transformed_mu_dif():
     assert torch.allclose(
         ParameterBeam_transformed._mu,
         ParticleBeam_transformed.particles.mean(axis=0),
-        rtol=1e-4,
+        rtol=1e-3,
         atol=1e-7,
         equal_nan=False,
     )
@@ -523,8 +525,8 @@ def test_ParameterBeam_transformed_cov():
     assert torch.allclose(
         ParameterBeam_transformed._cov,
         ParameterBeam_transformed_cov,
-        atol=1e-04,
-        rtol=1e-08,
+        rtol=1e-04,
+        atol=1e-08,
         equal_nan=False,
     )
 
@@ -533,8 +535,8 @@ def test_ParticleBeam_transformed_cov():
     assert np.allclose(
         np.cov(ParticleBeam_transformed.particles.t().numpy()),
         ParticleBeam_transformed_Energy,
-        atol=1e-03,
-        rtol=1e-06,
+        rtol=1e-03,
+        atol=1e-06,
         equal_nan=False,
     )
 

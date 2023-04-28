@@ -1235,30 +1235,34 @@ def test_ParticleBeam_n():
 
 
 def test_ParameterBeam_Energy():
-    actual = ParameterBeam.energy
     assert np.isclose(
-        actual, ParameterBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        ParameterBeam.energy,
+        ParameterBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_ParticleBeam_Energy():
-    actual = ParticleBeam.energy
     assert np.isclose(
-        actual, ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        ParticleBeam.energy, ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
     )
 
 
 def test_ParameterBeam_mu():
-    actual = ParameterBeam._mu
     assert torch.allclose(
-        actual, ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        ParameterBeam._mu, ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
     )
 
 
 def test_ParticleBeam_mu():
-    actual = ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual, ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        ParticleBeam.particles.mean(axis=0),
+        ParticleBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
@@ -1273,15 +1277,19 @@ def test_ParameterBeam_ParticleBeam_mu_dif():
 
 
 def test_ParameterBeam_cov():
-    actual = ParameterBeam._cov
     assert torch.allclose(
-        actual, ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        ParameterBeam._cov, ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
     )
 
 
 def test_ParticleBeam_cov():
-    actual = np.cov(ParticleBeam.particles.t().numpy())
-    assert np.allclose(actual, ParticleBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False)
+    assert np.allclose(
+        np.cov(ParticleBeam.particles.t().numpy()),
+        ParticleBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
+    )
 
 
 def test_ParameterBeam_ParticleBeam_cov_dif():
@@ -1300,30 +1308,42 @@ def test_Quadrupole_ParticleBeam_n():
 
 
 def test_Quadrupole_ParameterBeam_Energy():
-    actual = Quadrupole_ParameterBeam.energy
     assert np.isclose(
-        actual, Quadrupole_ParameterBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Quadrupole_ParameterBeam.energy,
+        Quadrupole_ParameterBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Quadrupole_ParticleBeam_Energy():
-    actual = Quadrupole_ParticleBeam.energy
     assert np.isclose(
-        actual, Quadrupole_ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Quadrupole_ParticleBeam.energy,
+        Quadrupole_ParticleBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Quadrupole_ParameterBeam_mu():
-    actual = Quadrupole_ParameterBeam._mu
     assert torch.allclose(
-        actual, Quadrupole_ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Quadrupole_ParameterBeam._mu,
+        Quadrupole_ParameterBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
 def test_Quadrupole_ParticleBeam_mu():
-    actual = Quadrupole_ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual, Quadrupole_ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Quadrupole_ParticleBeam.particles.mean(axis=0),
+        Quadrupole_ParticleBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
@@ -1338,16 +1358,22 @@ def test_Quadrupole_ParameterBeam_Quadrupole_ParticleBeam_mu_dif():
 
 
 def test_Quadrupole_ParameterBeam_cov():
-    actual = Quadrupole_ParameterBeam._cov
     assert torch.allclose(
-        actual, Quadrupole_ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        Quadrupole_ParameterBeam._cov,
+        Quadrupole_ParameterBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
 def test_Quadrupole_ParticleBeam_cov():
-    actual = np.cov(Quadrupole_ParticleBeam.particles.t().numpy())
     assert np.allclose(
-        actual, Quadrupole_ParticleBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        np.cov(Quadrupole_ParticleBeam.particles.t().numpy()),
+        Quadrupole_ParticleBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
@@ -1367,9 +1393,8 @@ def test_HorizontalCorrector_ParticleBeam_n():
 
 
 def test_HorizontalCorrector_ParameterBeam_Energy():
-    actual = HorizontalCorrector_ParameterBeam.energy
     assert np.isclose(
-        actual,
+        HorizontalCorrector_ParameterBeam.energy,
         HorizontalCorrector_ParameterBeam_Energy,
         rtol=1e-4,
         atol=1e-8,
@@ -1378,9 +1403,8 @@ def test_HorizontalCorrector_ParameterBeam_Energy():
 
 
 def test_HorizontalCorrector_ParticleBeam_Energy():
-    actual = HorizontalCorrector_ParticleBeam.energy
     assert np.isclose(
-        actual,
+        HorizontalCorrector_ParticleBeam.energy,
         HorizontalCorrector_ParticleBeam_Energy,
         rtol=1e-4,
         atol=1e-8,
@@ -1389,9 +1413,8 @@ def test_HorizontalCorrector_ParticleBeam_Energy():
 
 
 def test_HorizontalCorrector_ParameterBeam_mu():
-    actual = HorizontalCorrector_ParameterBeam._mu
     assert torch.allclose(
-        actual,
+        HorizontalCorrector_ParameterBeam._mu,
         HorizontalCorrector_ParameterBeam_mu,
         rtol=1e-4,
         atol=1e-9,
@@ -1400,9 +1423,8 @@ def test_HorizontalCorrector_ParameterBeam_mu():
 
 
 def test_HorizontalCorrector_ParticleBeam_mu():
-    actual = HorizontalCorrector_ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual,
+        HorizontalCorrector_ParticleBeam.particles.mean(axis=0),
         HorizontalCorrector_ParticleBeam_mu,
         rtol=1e-4,
         atol=1e-9,
@@ -1421,9 +1443,8 @@ def test_HorizontalCorrector_ParameterBeam_HorizontalCorrector_ParticleBeam_mu_d
 
 
 def test_HorizontalCorrector_ParameterBeam_cov():
-    actual = HorizontalCorrector_ParameterBeam._cov
     assert torch.allclose(
-        actual,
+        HorizontalCorrector_ParameterBeam._cov,
         HorizontalCorrector_ParameterBeam_cov,
         rtol=1e-4,
         atol=1e-16,
@@ -1432,9 +1453,8 @@ def test_HorizontalCorrector_ParameterBeam_cov():
 
 
 def test_HorizontalCorrector_ParticleBeam_cov():
-    actual = np.cov(HorizontalCorrector_ParticleBeam.particles.t().numpy())
     assert np.allclose(
-        actual,
+        np.cov(HorizontalCorrector_ParticleBeam.particles.t().numpy()),
         HorizontalCorrector_ParticleBeam_cov,
         rtol=1e-4,
         atol=1e-16,
@@ -1458,9 +1478,8 @@ def test_VerticalCorrector_ParticleBeam_n():
 
 
 def test_VerticalCorrector_ParameterBeam_Energy():
-    actual = VerticalCorrector_ParameterBeam.energy
     assert np.isclose(
-        actual,
+        VerticalCorrector_ParameterBeam.energy,
         VerticalCorrector_ParameterBeam_Energy,
         rtol=1e-4,
         atol=1e-8,
@@ -1469,9 +1488,8 @@ def test_VerticalCorrector_ParameterBeam_Energy():
 
 
 def test_VerticalCorrector_ParticleBeam_Energy():
-    actual = VerticalCorrector_ParticleBeam.energy
     assert np.isclose(
-        actual,
+        VerticalCorrector_ParticleBeam.energy,
         VerticalCorrector_ParticleBeam_Energy,
         rtol=1e-4,
         atol=1e-8,
@@ -1480,9 +1498,8 @@ def test_VerticalCorrector_ParticleBeam_Energy():
 
 
 def test_VerticalCorrector_ParameterBeam_mu():
-    actual = VerticalCorrector_ParameterBeam._mu
     assert torch.allclose(
-        actual,
+        VerticalCorrector_ParameterBeam._mu,
         VerticalCorrector_ParameterBeam_mu,
         rtol=1e-4,
         atol=1e-9,
@@ -1491,9 +1508,12 @@ def test_VerticalCorrector_ParameterBeam_mu():
 
 
 def test_VerticalCorrector_ParticleBeam_mu():
-    actual = VerticalCorrector_ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual, VerticalCorrector_ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        VerticalCorrector_ParticleBeam.particles.mean(axis=0),
+        VerticalCorrector_ParticleBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
@@ -1508,9 +1528,8 @@ def test_VerticalCorrector_ParameterBeam_VerticalCorrector_ParticleBeam_mu_dif()
 
 
 def test_VerticalCorrector_ParameterBeam_cov():
-    actual = VerticalCorrector_ParameterBeam._cov
     assert torch.allclose(
-        actual,
+        VerticalCorrector_ParameterBeam._cov,
         VerticalCorrector_ParameterBeam_cov,
         rtol=1e-4,
         atol=1e-16,
@@ -1519,9 +1538,8 @@ def test_VerticalCorrector_ParameterBeam_cov():
 
 
 def test_VerticalCorrector_ParticleBeam_cov():
-    actual = np.cov(VerticalCorrector_ParticleBeam.particles.t().numpy())
     assert np.allclose(
-        actual,
+        np.cov(VerticalCorrector_ParticleBeam.particles.t().numpy()),
         VerticalCorrector_ParticleBeam_cov,
         rtol=1e-4,
         atol=1e-16,
@@ -1545,30 +1563,42 @@ def test_Cavity_ParticleBeam_n():
 
 
 def test_Cavity_ParameterBeam_Energy():
-    actual = Cavity_ParameterBeam.energy
     assert np.isclose(
-        actual, Cavity_ParameterBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Cavity_ParameterBeam.energy,
+        Cavity_ParameterBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Cavity_ParticleBeam_Energy():
-    actual = Cavity_ParticleBeam.energy
     assert np.isclose(
-        actual, Cavity_ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Cavity_ParticleBeam.energy,
+        Cavity_ParticleBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Cavity_ParameterBeam_mu():
-    actual = Cavity_ParameterBeam._mu
     assert torch.allclose(
-        actual, Cavity_ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Cavity_ParameterBeam._mu,
+        Cavity_ParameterBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
 def test_Cavity_ParticleBeam_mu():
-    actual = Cavity_ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual, Cavity_ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Cavity_ParticleBeam.particles.mean(axis=0),
+        Cavity_ParticleBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
@@ -1583,16 +1613,22 @@ def test_Cavity_ParameterBeam_Cavity_ParticleBeam_mu_dif():
 
 
 def test_Cavity_ParameterBeam_cov():
-    actual = Cavity_ParameterBeam._cov
     assert torch.allclose(
-        actual, Cavity_ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        Cavity_ParameterBeam._cov,
+        Cavity_ParameterBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
 def test_Cavity_ParticleBeam_cov():
-    actual = np.cov(Cavity_ParticleBeam.particles.t().numpy())
     assert np.allclose(
-        actual, Cavity_ParticleBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        np.cov(Cavity_ParticleBeam.particles.t().numpy()),
+        Cavity_ParticleBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
@@ -1612,30 +1648,42 @@ def test_BPM_ParticleBeam_n():
 
 
 def test_BPM_ParameterBeam_Energy():
-    actual = BPM_ParameterBeam.energy
     assert np.isclose(
-        actual, BPM_ParameterBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        BPM_ParameterBeam.energy,
+        BPM_ParameterBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_BPM_ParticleBeam_Energy():
-    actual = BPM_ParticleBeam.energy
     assert np.isclose(
-        actual, BPM_ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        BPM_ParticleBeam.energy,
+        BPM_ParameterBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_BPM_ParameterBeam_mu():
-    actual = BPM_ParameterBeam._mu
     assert torch.allclose(
-        actual, BPM_ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        BPM_ParameterBeam._mu,
+        BPM_ParameterBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
 def test_BPM_ParticleBeam_mu():
-    actual = BPM_ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual, BPM_ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        BPM_ParticleBeam.particles.mean(axis=0),
+        BPM_ParticleBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
@@ -1650,16 +1698,22 @@ def test_BPM_ParameterBeam_BPM_ParticleBeam_mu_dif():
 
 
 def test_BPM_ParameterBeam_cov():
-    actual = BPM_ParameterBeam._cov
     assert torch.allclose(
-        actual, BPM_ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        BPM_ParameterBeam._cov,
+        BPM_ParameterBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
 def test_BPM_ParticleBeam_cov():
-    actual = np.cov(BPM_ParticleBeam.particles.t().numpy())
     assert np.allclose(
-        actual, BPM_ParticleBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        np.cov(BPM_ParticleBeam.particles.t().numpy()),
+        BPM_ParticleBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
@@ -1679,30 +1733,42 @@ def test_Screen_ParticleBeam_n():
 
 
 def test_Screen_ParameterBeam_Energy():
-    actual = Screen_ParameterBeam.energy
     assert np.isclose(
-        actual, Screen_ParameterBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Screen_ParameterBeam.energy,
+        Screen_ParameterBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Screen_ParticleBeam_Energy():
-    actual = Screen_ParticleBeam.energy
     assert np.isclose(
-        actual, Screen_ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Screen_ParticleBeam.energy,
+        Screen_ParticleBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Screen_ParameterBeam_mu():
-    actual = Screen_ParameterBeam._mu
     assert torch.allclose(
-        actual, Screen_ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Screen_ParameterBeam._mu,
+        Screen_ParameterBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
 def test_Screen_ParticleBeam_mu():
-    actual = Screen_ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual, Screen_ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Screen_ParticleBeam.particles.mean(axis=0),
+        Screen_ParticleBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
@@ -1717,16 +1783,22 @@ def test_Screen_ParameterBeam_Screen_ParticleBeam_mu_dif():
 
 
 def test_Screen_ParameterBeam_cov():
-    actual = Screen_ParameterBeam._cov
     assert torch.allclose(
-        actual, Screen_ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        Screen_ParameterBeam._cov,
+        Screen_ParameterBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
 def test_Screen_ParticleBeam_cov():
-    actual = np.cov(Screen_ParticleBeam.particles.t().numpy())
     assert np.allclose(
-        actual, Screen_ParticleBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        np.cov(Screen_ParticleBeam.particles.t().numpy()),
+        Screen_ParticleBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
@@ -1746,30 +1818,42 @@ def test_Undulator_ParticleBeam_n():
 
 
 def test_Undulator_ParameterBeam_Energy():
-    actual = Undulator_ParameterBeam.energy
     assert np.isclose(
-        actual, Undulator_ParameterBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Undulator_ParameterBeam.energy,
+        Undulator_ParameterBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Undulator_ParticleBeam_Energy():
-    actual = Undulator_ParticleBeam.energy
     assert np.isclose(
-        actual, Undulator_ParticleBeam_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+        Undulator_ParticleBeam.energy,
+        Undulator_ParticleBeam_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
     )
 
 
 def test_Undulator_ParameterBeam_mu():
-    actual = Undulator_ParameterBeam._mu
     assert torch.allclose(
-        actual, Undulator_ParameterBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Undulator_ParameterBeam._mu,
+        Undulator_ParameterBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
 def test_Undulator_ParticleBeam_mu():
-    actual = Undulator_ParticleBeam.particles.mean(axis=0)
     assert torch.allclose(
-        actual, Undulator_ParticleBeam_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+        Undulator_ParticleBeam.particles.mean(axis=0),
+        Undulator_ParticleBeam_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
     )
 
 
@@ -1784,16 +1868,22 @@ def test_Undulator_ParameterBeam_Undulator_ParticleBeam_mu_dif():
 
 
 def test_Undulator_ParameterBeam_cov():
-    actual = Undulator_ParameterBeam._cov
     assert torch.allclose(
-        actual, Undulator_ParameterBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        Undulator_ParameterBeam._cov,
+        Undulator_ParameterBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
 def test_Undulator_ParticleBeam_cov():
-    actual = np.cov(Undulator_ParticleBeam.particles.t().numpy())
     assert np.allclose(
-        actual, Undulator_ParticleBeam_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+        np.cov(Undulator_ParticleBeam.particles.t().numpy()),
+        Undulator_ParticleBeam_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
     )
 
 
