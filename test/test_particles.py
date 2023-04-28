@@ -382,7 +382,7 @@ ParticleBeam_transformed_cov = [
     ],
 ]
 
-
+# From parameters
 def test_ParticleBeam_parameters_n():
     assert ParticleBeam_parameters.n == ParticleBeam_parameters_n
 
@@ -466,7 +466,80 @@ def test_ParameterBeam_parameters_ParticleBeam_parameters_cov_dif():
         equal_nan=False,
     )
 
+# Astra
 
+def test_ParticleBeam_astra_n():
+    assert ParticleBeam_astra.n == ParticleBeam_astra_n
+
+
+def test_ParameterBeam_astra_Energy():
+    assert np.isclose(
+        ParameterBeam_astra.energy,
+        ParameterBeam_astra_Energy,
+        rtol=1e-4,
+        atol=1e-8,
+        equal_nan=False,
+    )
+
+
+def test_ParticleBeam_astra_Energy():
+    assert np.isclose(
+        ParticleBeam_astra.energy, ParticleBeam_astra_Energy, rtol=1e-4, atol=1e-8, equal_nan=False
+    )
+
+
+def test_ParameterBeam_astra_mu():
+    assert torch.allclose(
+        ParameterBeam_astra._mu, ParameterBeam_astra_mu, rtol=1e-4, atol=1e-9, equal_nan=False
+    )
+
+
+def test_ParticleBeam_astra_mu():
+    assert torch.allclose(
+        ParticleBeam_astra.particles.mean(axis=0),
+        ParticleBeam_astra_mu,
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
+    )
+
+
+def test_ParameterBeam_astra_ParticleBeam_astra_mu_dif():
+    assert torch.allclose(
+        ParameterBeam_astra._mu,
+        ParticleBeam_astra.particles.mean(axis=0),
+        rtol=1e-4,
+        atol=1e-9,
+        equal_nan=False,
+    )
+
+
+def test_ParameterBeam_astra_cov():
+    assert torch.allclose(
+        ParameterBeam_astra._cov, ParameterBeam_astra_cov, rtol=1e-4, atol=1e-16, equal_nan=False
+    )
+
+
+def test_ParticleBeam_astra_cov():
+    assert np.allclose(
+        np.cov(ParticleBeam_astra.particles.t().numpy()),
+        ParticleBeam_astra_cov,
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
+    )
+
+
+def test_ParameterBeam_astra_ParticleBeam_astra_cov_dif():
+    assert np.allclose(
+        ParameterBeam_astra._cov,
+        np.cov(ParticleBeam_astra.particles.t().numpy()),
+        rtol=1e-4,
+        atol=1e-16,
+        equal_nan=False,
+    )
+
+# Transformed_to
 def test_ParticleBeam_transformed_n():
     assert ParticleBeam_transformed.n == ParticleBeam_transformed_n
 
