@@ -17,6 +17,36 @@ from cheetah import (
 ParameterBeam = ParameterBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
 ParticleBeam = ParticleBeam.from_astra("../benchmark/cheetah/ACHIP_EA1_2021.1351.001")
 
+ParameterBeam_parameters = ParameterBeam.from_parameters(sigma_x=175e-9, sigma_y=175e-9)
+ParticleBeam_parameters = ParticleBeam.from_parameters(sigma_x=175e-9, sigma_y=175e-9)
+
+ParameterBeam_transformed = ParameterBeam_parameters.transformed_to(
+    mu_x=8.6423e-06,
+    mu_xp=5.9384e-07,
+    mu_y=-2.7276e-07,
+    mu_yp=-3.1776e-08,
+    sigma_x=123e-06,
+    sigma_xp=7e-07,
+    sigma_y=8e-08,
+    sigma_yp=2e-06,
+    sigma_s=2e-05,
+    sigma_p=2e-06,
+    energy=130089263.44785302,
+)
+ParticleBeam_transformed = ParticleBeam_parameters.transformed_to(
+    mu_x=8.6423e-06,
+    mu_xp=5.9384e-07,
+    mu_y=-2.7276e-07,
+    mu_yp=-3.1776e-08,
+    sigma_x=123e-06,
+    sigma_xp=7e-07,
+    sigma_y=8e-08,
+    sigma_yp=2e-06,
+    sigma_s=2e-05,
+    sigma_p=2e-06,
+    energy=130089263.44785302,
+)
+
 Drift = Segment([Drift(length=0.02, name="element")])
 
 Quadrupole = Segment([Quadrupole(length=0.02, misalignment=(1, 1), name="element")])
@@ -286,5 +316,52 @@ print(
 print(
     "FinalTestResult_ParticleBeam_cov = {}".format(
         np.cov(FinalTestResult_ParticleBeam.particles.t().numpy())
+    )
+)
+
+# Particles
+# from parameters
+print("ParticleBeam_parameters_n = {}".format(ParticleBeam_parameters.n))
+
+print("ParameterBeam_parameters_Energy = {}".format(ParameterBeam_parameters.energy))
+
+print("ParticleBeam_parameters_Energy = {}".format(ParticleBeam_parameters.energy))
+
+print("ParameterBeam_parameters_mu = {}".format(ParameterBeam_parameters._mu))
+
+print(
+    "ParticleBeam_parameters_mu = {}".format(
+        ParticleBeam_parameters.particles.mean(axis=0)
+    )
+)
+
+print("ParameterBeam_parameters_cov = {}".format(ParameterBeam_parameters._cov))
+
+print(
+    "ParticleBeam_parameters_cov = {}".format(
+        np.cov(ParticleBeam_parameters.particles.t().numpy())
+    )
+)
+
+# transformed to
+print("ParticleBeam_transformed_n = {}".format(ParticleBeam_transformed.n))
+
+print("ParameterBeam_transformed_Energy = {}".format(ParameterBeam_transformed.energy))
+
+print("ParticleBeam_transformed_Energy = {}".format(ParticleBeam_transformed.energy))
+
+print("ParameterBeam_transformed_mu = {}".format(ParameterBeam_transformed._mu))
+
+print(
+    "ParticleBeam_transformed_mu = {}".format(
+        ParticleBeam_transformed.particles.mean(axis=0)
+    )
+)
+
+print("ParameterBeam_transformed_cov = {}".format(ParameterBeam_transformed._cov))
+
+print(
+    "ParticleBeam_transformed_cov = {}".format(
+        np.cov(ParticleBeam_transformed.particles.t().numpy())
     )
 )
