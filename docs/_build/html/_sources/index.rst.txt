@@ -100,6 +100,8 @@ Install the cheetah package as editable
 .. code-block:: python
    pip install -e .
 
+``pip install -e .``
+
 Indices and tables
 ==================
 
