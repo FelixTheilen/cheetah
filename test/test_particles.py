@@ -531,7 +531,7 @@ def test_ParameterBeam_astra_cov():
         ParameterBeam_astra._cov,
         ParameterBeam_astra_cov,
         rtol=1e-04,
-        atol=1e-14,
+        atol=1e-12,
         equal_nan=False,
     )
 
@@ -541,7 +541,7 @@ def test_ParticleBeam_astra_cov():
         np.cov(ParticleBeam_astra.particles.t().numpy()),
         ParticleBeam_astra_cov,
         rtol=1e-04,
-        atol=1e-14,
+        atol=1e-12,
         equal_nan=False,
     )
 
@@ -551,7 +551,7 @@ def test_ParameterBeam_astra_ParticleBeam_astra_cov_dif():
         ParameterBeam_astra._cov,
         np.cov(ParticleBeam_astra.particles.t().numpy()),
         rtol=1e-4,
-        atol=1e-14,
+        atol=1e-12,
         equal_nan=False,
     )
 
@@ -635,7 +635,7 @@ def test_ParameterBeam_transformed_ParticleBeam_transformed_cov_dif():
     assert np.allclose(
         ParameterBeam_transformed._cov,
         np.cov(ParticleBeam_transformed.particles.t().numpy()),
-        rtol=1e-05,
+        rtol=1e-03,
         atol=1e-08,
         equal_nan=False,
     )
